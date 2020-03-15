@@ -14,11 +14,28 @@ services:
       - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
       - ./web/local.ini:/usr/local/etc/php/conf.d/local.ini
       - ./web/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      - ./logs:/var/log/apache2
     environment:
       - APACHE_RUN_GROUP=#1000
       - APACHE_RUN_USER=#1000
       - PATH_TO=${APP_PATH_HOST}
       - SERVER_NAME=${APP_HOST}
+
+  php-queue:
+    container_name: php-queue
+    hostname: php-queue
+    build: ./web
+    restart: always
+    command: >
+      bash -c "php artisan migrate
+      && php artisan queue:work"
+    working_dir: ${APP_PATH_CONTAINER}
+    volumes:
+      - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
+      - ./web/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./web/vhost.conf:/etc/apache2/sites-available/000-default.conf
+    links:
+      - composer
 
   db:
     container_name: db

@@ -1,1 +1,5 @@
-databases/
+databases/*
+!databases/.gitkeep
+/.idea
+logs/*
+!logs/.gitkeep
