@@ -6,10 +6,10 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link"  href="{{ url('/') }}">Home</a>
+                <a class="nav-link {{ (request()->is('/')) ? 'active' : '' }}"  href="{{ url('/') }}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link"  href="{{ url('/add') }}">Upload</a>
+                <a class="nav-link {{ (request()->is('add')) ? 'active' : '' }}"  href="{{ url('/add') }}">Upload</a>
             </li>
         </ul>
     </div>

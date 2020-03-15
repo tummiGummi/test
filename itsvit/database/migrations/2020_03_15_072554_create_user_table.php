@@ -23,6 +23,7 @@ class CreateUserTable extends Migration
             $table->integer('gender_id', false, true);
             $table->index('gender_id');
             $table->foreign('gender_id')->references('id')->on('gender');
+            $table->smallInteger('age', false, true)->nullable();
             $table->date('created_at')->nullable();
         });
     }
